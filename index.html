@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AISquare · July–August Execution Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16211f; --ink2:#4a5a56; --ink3:#8a9994;
+  --paper:#f4f2ec; --card:#fffefa; --line:#ddd8ca; --line2:#c9c2ae;
+  --l1:#0d6b63; --l1bg:#dff0ed;
+  --l2:#5b4b8a; --l2bg:#e9e4f4;
+  --p1:#3a5f8a; --p1bg:#e3ebf4;
+  --cust:#a8641c; --custbg:#f7e9d4;
+  --proc:#444d4b; --procbg:#e5e7e3;
+  --str:#8a9994; --strbg:#efeee8;
+  --red:#b3372a; --redbg:#f6ded9;
+  --amber:#b07816; --amberbg:#f6ecd4;
+  --green:#33723a; --greenbg:#e0efdd;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--paper);color:var(--ink);font-size:14px;line-height:1.5;
+  background-image:radial-gradient(circle at 1px 1px, rgba(22,33,31,.05) 1px, transparent 0);background-size:26px 26px;}
+.mono{font-family:'IBM Plex Mono',monospace}
+header{border-bottom:3px solid var(--ink);background:var(--card);padding:26px 34px 0}
+.kicker{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--l1);font-weight:600}
+h1{font-family:'IBM Plex Serif',serif;font-size:30px;font-weight:600;margin:4px 0 2px}
+.sub{color:var(--ink2);font-size:13px;margin-bottom:14px}
+.sub b{color:var(--ink)}
+.draftnote{display:inline-block;background:var(--amberbg);border:1px solid var(--amber);color:#7c5410;font-size:12px;padding:6px 12px;border-radius:3px;margin-bottom:16px}
+.tabs{display:flex;gap:2px}
+.tab{font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:500;padding:11px 20px;border:1px solid var(--line2);border-bottom:none;
+  background:var(--paper);color:var(--ink2);cursor:pointer;border-radius:6px 6px 0 0;position:relative;top:1px}
+.tab.on{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:600}
+main{padding:26px 34px 80px;max-width:1700px}
+.pane{display:none}.pane.on{display:block}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:2px 0 20px;font-size:12px;color:var(--ink2)}
+.lg{display:flex;align-items:center;gap:6px}
+.sw{width:14px;height:14px;border-radius:3px;border:1px solid rgba(0,0,0,.25)}
+/* ---------- TAB 1 ---------- */
+.lanehead{font-family:'IBM Plex Serif',serif;font-size:20px;font-weight:600;margin:30px 0 4px;padding-left:12px;border-left:5px solid var(--ink)}
+.lanehead.l1{border-color:var(--l1)} .lanehead.l2{border-color:var(--l2)} .lanehead.p1{border-color:var(--p1)}
+.lanedesc{color:var(--ink2);font-size:13px;margin:0 0 14px 17px}
+.wsgrid{display:grid;grid-template-columns:1fr;gap:10px}
+.ws{background:var(--card);border:1px solid var(--line2);border-radius:6px;overflow:hidden;box-shadow:2px 3px 0 rgba(22,33,31,.07)}
+.ws-h{padding:12px 16px;display:flex;gap:10px;align-items:baseline;cursor:pointer}
+.ws.open .ws-h{border-bottom:1px solid var(--line)}
+.ws-h:hover{background:var(--paper)}
+.ws-arrow{font-size:12px;color:var(--ink2);transition:transform .18s ease;flex-shrink:0;align-self:center}
+.ws.open .ws-arrow{transform:rotate(90deg)}
+.wsid{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12px;padding:2px 7px;border-radius:3px;color:#fff;flex-shrink:0}
+.ws-t{font-weight:600;font-size:14.5px;flex:1}
+.ws-own{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink2);white-space:nowrap}
+.ws-b{padding:12px 16px;display:none}
+.ws.open .ws-b{display:block}
+.ws-sec{margin-bottom:10px}
+.ws-lb{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);font-weight:600;margin-bottom:3px}
+.ws-sec p{font-size:13px;color:var(--ink2)}
+.ws-sec ul{list-style:none;margin-top:2px}
+.ws-sec li{font-size:13px;color:var(--ink2);padding:3px 0 3px 22px;position:relative;border-bottom:1px dotted var(--line)}
+.ws-sec li:before{content:'';position:absolute;left:2px;top:8px;width:11px;height:11px;border:1.5px solid var(--ink3);border-radius:2px}
+.risk{background:var(--redbg);border-left:3px solid var(--red);padding:6px 10px;font-size:12.5px;color:#6e2119;border-radius:0 3px 3px 0}
+.expandall{font-family:'IBM Plex Mono',monospace;font-size:12px;background:none;border:1px solid var(--ink2);color:var(--ink2);padding:5px 12px;border-radius:3px;cursor:pointer;margin-bottom:6px}
+.expandall:hover{background:var(--ink);color:var(--paper)}
+/* ---------- TAB 2 ---------- */
+.person{background:var(--card);border:1px solid var(--line2);border-radius:6px;margin-bottom:22px;box-shadow:2px 3px 0 rgba(22,33,31,.07);overflow:hidden}
+.p-h{display:flex;align-items:center;gap:16px;padding:14px 20px;border-bottom:2px solid var(--ink)}
+.p-name{font-family:'IBM Plex Serif',serif;font-size:19px;font-weight:600}
+.p-role{font-size:12px;color:var(--ink2)}
+.p-cap{margin-left:auto;text-align:right}
+.capbar{width:150px;height:9px;background:var(--procbg);border:1px solid var(--line2);border-radius:5px;overflow:hidden}
+.capfill{height:100%}
+.capline{display:flex;align-items:center;gap:8px;justify-content:flex-end;margin:2px 0}
+.caplab{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em}
+.capnum{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;min-width:86px;text-align:right}
+.okn{color:var(--green)} .okf{background:var(--green)}
+.warnn{color:var(--amber)} .warnf{background:var(--amber)}
+.overn{color:var(--red)} .overf{background:var(--red)}
+.p-verdict{padding:9px 20px;font-size:12.5px;border-bottom:1px solid var(--line)}
+.p-verdict.over{background:var(--redbg);color:#6e2119}
+.p-verdict.warn{background:var(--amberbg);color:#7c5410}
+.p-verdict.ok{background:var(--greenbg);color:#274f2c}
+.tasktbl{width:100%;border-collapse:collapse}
+.tasktbl th{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);text-align:left;padding:9px 12px;border-bottom:1px solid var(--line2);background:var(--paper)}
+.tasktbl td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;font-size:13px}
+.tasktbl tr:last-child td{border-bottom:none}
+.t-title{font-weight:600;font-size:13.5px}
+.t-ws{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#fff;padding:1px 6px;border-radius:3px;margin-right:6px}
+.t-goal{color:var(--l1);font-size:12px;margin-top:4px;font-style:italic}
+.goalp{color:var(--l1)!important;font-weight:500}
+.t-scope{color:var(--ink2);font-size:12.5px;margin-top:4px}
+.t-scope li{margin-left:16px;padding:1px 0}
+.t-dod{font-size:12px;color:var(--ink2);font-style:italic;max-width:330px}
+.estcell{font-family:'IBM Plex Mono',monospace;font-weight:600;white-space:nowrap}
+.estcell small{display:block;font-weight:400;color:var(--ink3);font-size:10px}
+.wk-chip{font-family:'IBM Plex Mono',monospace;font-size:11px;background:var(--procbg);border:1px solid var(--line2);padding:1px 7px;border-radius:3px;white-space:nowrap}
+/* ---------- TIMELINES ---------- */
+.tl-wrap{overflow-x:auto;background:var(--card);border:1px solid var(--line2);border-radius:6px;box-shadow:2px 3px 0 rgba(22,33,31,.07)}
+.tl{min-width:1720px}
+.tl-head{display:grid;grid-template-columns:210px repeat(25,1fr);border-bottom:2px solid var(--ink);background:var(--paper);position:sticky;top:0;z-index:5}
+.tl-weeks{display:grid;grid-template-columns:210px repeat(5,1fr);border-bottom:1px solid var(--line2);background:var(--ink);color:var(--paper)}
+.tl-weeks div{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;padding:6px 10px;border-right:1px solid rgba(255,255,255,.2);text-transform:uppercase}
+.tl-day{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink2);text-align:center;padding:5px 0;border-right:1px solid var(--line)}
+.tl-day.wkend{border-right:2px solid var(--ink2)}
+.tl-corner{padding:5px 10px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink3);border-right:2px solid var(--ink);text-transform:uppercase;letter-spacing:.1em}
+.tl-row{display:grid;grid-template-columns:210px 1fr;border-bottom:1px solid var(--line2)}
+.tl-row:nth-child(even){background:rgba(221,216,202,.15)}
+.tl-who{padding:10px 12px;border-right:2px solid var(--ink);font-size:13px}
+.tl-who .nm{font-weight:600}
+.tl-who .cp{font-family:'IBM Plex Mono',monospace;font-size:11px;margin-top:2px}
+.tl-canvas{position:relative;background-image:repeating-linear-gradient(to right,transparent,transparent calc(4% - 1px),var(--line) calc(4% - 1px),var(--line) 4%)}
+.tl-canvas .wksep{position:absolute;top:0;bottom:0;width:2px;background:var(--line2)}
+.bar{position:absolute;height:22px;border-radius:3px;color:#fff;font-size:10.5px;font-weight:500;line-height:22px;padding:0 7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:default;border:1px solid rgba(0,0,0,.25);box-shadow:1px 1px 0 rgba(22,33,31,.15)}
+.bar:hover{z-index:9;overflow:visible;min-width:max-content;box-shadow:2px 3px 6px rgba(22,33,31,.35)}
+.bar .est{font-family:'IBM Plex Mono',monospace;opacity:.85;font-size:9.5px;margin-left:5px}
+.bar.stretch{border-style:dashed;color:var(--ink2)}
+.bar.st-done{opacity:.55;border:2px solid var(--green)}
+.bar.st-review{border:2px solid #1a7f8a;box-shadow:0 0 0 1px #1a7f8a}
+.bar.st-prog{box-shadow:inset 0 -3px 0 rgba(255,255,255,.5)}
+.bar.st-blocked{background:repeating-linear-gradient(45deg,var(--red),var(--red) 6px,#8a2a20 6px,#8a2a20 12px)!important}
+.bar.st-overdue{border:2px solid var(--red);box-shadow:0 0 0 1.5px var(--red)}
+.todayline{position:absolute;top:0;bottom:0;width:2.5px;background:var(--red);z-index:8}
+.todaylab{position:absolute;top:-1px;font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:#fff;background:var(--red);padding:0 4px;border-radius:0 3px 3px 0;z-index:8}
+.stbadge{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0}
+.sb-done{background:var(--greenbg);color:var(--green);border:1px solid var(--green)}
+.sb-review{background:#d9edef;color:#155e66;border:1px solid #1a7f8a}
+.sb-prog{background:var(--amberbg);color:#7c5410;border:1px solid var(--amber)}
+.sb-blocked{background:var(--redbg);color:var(--red);border:1px solid var(--red)}
+.sb-overdue{background:var(--red);color:#fff;border:1px solid var(--red)}
+.sb-todo{background:var(--procbg);color:var(--ink2);border:1px solid var(--line2)}
+.dated{position:absolute;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--red);font-weight:600;top:2px}
+.note{background:var(--card);border:1px dashed var(--line2);border-radius:6px;padding:12px 16px;font-size:12.5px;color:var(--ink2);margin-bottom:16px}
+.note b{color:var(--ink)}
+@media print{.tabs{display:none}.pane{display:block!important;page-break-before:always}}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">AISquare · Team OS · Delivery</div>
+  <h1>July–August Execution Plan</h1>
+  <div class="sub">Planning <b>Jul 13–17</b> · Execution <b>Jul 20 – Aug 7</b> · <b>QA buffer Aug 10–14</b> · 33 workstreams · 10 builders · Board = source of truth</div>
+  <div class="draftnote" style="background:var(--greenbg);border-color:var(--green);color:#274f2c">✓ <b>COMMITTED EXECUTION PLAN</b> — published Jul 24. Estimates validated against the GitHub board (source of truth). Changes go through the board and the weekly go/no-go, not this file.</div>
+  <nav class="tabs">
+    <button class="tab on" data-pane="p1">1 · Workstreams</button>
+    <button class="tab" data-pane="p2">2 · By Person</button>
+    <button class="tab" data-pane="p3">3 · Timeline · People</button>
+    <button class="tab" data-pane="p4">4 · Timeline · Workstreams</button>
+  </nav>
+</header>
+<main>
+<div class="legend">
+  <span class="lg"><span class="sw" style="background:var(--l1)"></span>Lane 1 · Explainability chain</span>
+  <span class="lg"><span class="sw" style="background:var(--l2)"></span>Lane 2 · Collective Intelligence</span>
+  <span class="lg"><span class="sw" style="background:var(--p1)"></span>P1 build</span>
+  <span class="lg"><span class="sw" style="background:var(--cust)"></span>Customer-dated</span>
+  <span class="lg"><span class="sw" style="background:var(--proc)"></span>Process / planning</span>
+  <span class="lg"><span class="sw" style="background:var(--strbg);border-style:dashed"></span>Stretch — first to cut</span>
+</div>
+
+<section id="p1" class="pane on">
+  <button class="expandall" onclick="toggleAll()">Expand / collapse all</button>
+  <div id="wsroot"></div>
+</section>
+
+<section id="p2" class="pane">
+  <div class="note"><b>How to read (updated Jul 24):</b> tasks per person with live status chips (board = source of truth). Capacity bars show the original window plan; the <b>verdict line shows REMAINING work vs the ~10 days left (Jul 27 – Aug 7)</b>, counting in-progress items at 50%. E1/E2/E4 QA-wave estimates come from the board and need verification at Monday's go/no-go.</div>
+  <div id="peopleroot"></div>
+</section>
+
+<section id="p3" class="pane">
+  <div class="note"><b>Timeline by person.</b> Higher-priority items are front-loaded; dependencies sequenced so nothing blocks (spikes &amp; decision docs close in planning week; consumers start after). Hover a bar for the full label. Red ▼ marks hard external dates.</div>
+  <div class="tl-wrap"><div class="tl" id="tl-people"></div></div>
+</section>
+
+<section id="p4" class="pane">
+  <div class="note"><b>Timeline by workstream.</b> Same bars, grouped by the 29 workstreams — shows where streams hand off and where they converge.</div>
+  <div class="tl-wrap"><div class="tl" id="tl-ws"></div></div>
+</section>
+</main>
+
+<script>
+/* ================= DATA ================= */
+const STL={done:'DONE',review:'IN REVIEW',prog:'IN PROGRESS',blocked:'BLOCKED',overdue:'OVERDUE',todo:'TODO'};
+function stChip(st){return st?`<span class="stbadge sb-${st}">${STL[st]}</span>`:''}
+const LANES={L1:['var(--l1)','Lane 1'],L2:['var(--l2)','Lane 2'],P1:['var(--p1)','P1'],CUST:['var(--cust)','Customer'],PROC:['var(--proc)','Process'],STR:['var(--str)','Stretch']};
+const DAYS=['Mon 13','Tue 14','Wed 15','Thu 16','Fri 17','Mon 20','Tue 21','Wed 22','Thu 23','Fri 24','Mon 27','Tue 28','Wed 29','Thu 30','Fri 31','Mon 3','Tue 4','Wed 5','Thu 6','Fri 7','Mon 10','Tue 11','Wed 12','Thu 13','Fri 14'];
+const WEEKS=['PLANNING · JUL 13–17','WEEK 1 · JUL 20–24','WEEK 2 · JUL 27–31','WEEK 3 · AUG 3–7','QA BUFFER · AUG 10–14'];
+
+const WS=[
+ {id:'WS-01',lane:'L1',t:'ECS stress/load tests',own:'Anmol + Vaibhav',st:'overdue',goal:'Validated throughput, latency and cost numbers that IKS, Verizon and pricing can quote, from a suite we can rerun anytime including against competitors.',dod:'Results table (latency low/high/avg, cost/trace, failure modes) in repo w/ reproducible scripts; zero demo downtime.',sub:['Test matrix: pick the trace rates, concurrency tiers and payload sizes we will claim numbers for. Required: a table others can rerun, not ad-hoc runs','Isolated ECS test env (never demo env)','AWS budget cap set before running','Run + capture','Result tables to Jatin: low/high/avg latency, cost per trace, failure modes. Required: committed to repo with the rerun script','Quotable numbers → IKS deck + pricing'],dep:'Dual staging; EC2→ECS demo migration',risk:'AWS bill spike — cap first.'},
+ {id:'WS-02',lane:'L1',t:'Google ADK v1 (Verizon ~Jul 14)',own:'Vaibhav · bk Arbind',st:'review',goal:'One real Python ADK agent traced end-to-end in explainability, demoable to Verizon. Not GA, just credibly working.',dod:'Python ADK agent → traces → policy check → dashboard live; quickstart doc; written "Python only" scope note.',sub:['Adapter spec: decide WHICH hooks ADK agents get (trace capture, policy eval, context injection) and write it down. Required: 1-pager before code','Build adapter vs sample ADK agent','E2E integration test','Quickstart doc + scope note','Verizon demo dry-run','v1→GA gap list: what Verizon-v1 does NOT cover that IKS/Skit will need. Required: honest list so Scott can set expectations'],dep:'Pre-window items; SDK stable',risk:'External promise says GA — if v1-only, Scott resets Verizon BEFORE Jul 14.'},
+ {id:'WS-03',lane:'L1',t:'Govern Mode robustness',own:'Jatin lead',st:'overdue',goal:'Govern mode is provably robust: accuracy measured not asserted, audit trail exportable at run/studio/project level, failure behavior defined.',dod:'Enforcement accuracy MEASURED (target 90%+); audit-export verified w/ sample; Studio Level exports live; fail-open/closed matrix; proxy + HIPAA docs published.',sub:['Define enforcement eval set: which policies, which trace corpus, how many runs. Required: the set that produces the 90% number we quote','Run accuracy measurement post-ECS','If <90%: tune vs reframe honestly','Verify audit-export API: run a real export, keep the artifact. Required: proof it works, not the assumption','Studio Level exports: per-studio audit report (runs, verdicts, violations, policies, period) → PDF/JSON, permission-scoped','Fail-open/fail-closed matrix: for each policy class, what happens when the engine is down — block or pass? Jatin owns the stance; required output: a documented decision per class','Publish proxy integration doc (TL-052)','Publish HIPAA answer (TL-051)','IKS dry-run w/ role-played Justin'],dep:'WS-01',risk:'The 90% is a hope, not a measurement — measure before IKS deck locks.'},
+ {id:'WS-03b',lane:'L1',t:'OpenAI BAA',own:'Jatin (~1 wk)',st:'review',goal:'Signed OpenAI BAA on file, reusable in every healthcare deal answer (Falkovia Q7, IKS).',dod:'Signed BAA on file; date + scope shared with GTM.',sub:['Initiate via OpenAI enterprise process','Legal review pass','Execute + file','Record in compliance evidence store (→WS-27)','Communicate to Jaikrit/Scott'],dep:'—',risk:''},
+ {id:'WS-04',lane:'L1',t:'Latency to voice-grade',own:'Arbind (architecture/scaling) + Vaibhav (execution/validation)',st:'prog',goal:'A working 200 to 300ms enforcement path exists and is benchmarked. The voice-latency objection (Skit, Galileo comparison) dies.',dod:'p95 published per path; fast gate ≤300ms on staging; deterministic-first routing live; customer-facing benchmark doc.',sub:['Baseline p50/p95 per gate path: measure today (inline 0.5–0.7s, fast gate 395ms, async 3.9s). Required: numbers before optimizing','Per-mode SLA targets: what each mode promises (inline vs fast gate vs async). Required: targets the benchmark doc will publish','Implement cut-path: the ~200–330ms design already exists on paper — build it. Required: fast gate ≤300ms on staging','Deterministic-first routing + verdict caching','Re-benchmark on ECS','Publish benchmark doc'],dep:'WS-01 env; WS-18 instrumentation',risk:'Arbind forward-deployed — call load erodes this.'},
+ {id:'WS-05',lane:'L1',t:'Tri-provider proxy (75% done)',own:'Arbind · bk Jatin',st:'done',goal:'Proxy verified on Claude + OpenAI + Gemini; the zero-code onboarding path is shippable to Nasiko/IKS.',dod:'Tests pass on Claude/OpenAI/Gemini; config doc; FE paste-prompt path updated; setup doc ready for Nasiko/IKS.',sub:['Finish Gemini tests (Claude + OpenAI/Codex done — Jul 13)','On-prem vs shared config matrix','FE paste-prompt update','Publish setup doc'],dep:'—',risk:''},
+ {id:'WS-06',lane:'L1',t:'Policy extraction from prompts',own:'Vaibhav',st:'prog',goal:'A customer pastes their system prompt, gets enforceable policies with human review. No manual policy authoring.',dod:'Basic version ALREADY DEPLOYED (Jul 13 — confirm feature flag). Remaining: HITL review UI + eval/testing. Prompt → policies → HITL review → apply → enforce.',sub:['Eval corpus ≥20 prompts (negations/critical-nos)','Extraction quality pass (prompt-critique skill)','HITL review UI — never silent auto-apply','Wire accepted policies into engine','Flag + demo script'],dep:'WS-11',risk:'If quality weak by wk2 → ship as "draft policies" framing.'},
+ {id:'WS-07',lane:'L2',t:'CI phase-1 scope spike',own:'Aditya + Arbind + Jatin + Vaibhav · Scott attending · 3d timebox · virtual OK',goal:'A written phase-1 scope for collective intelligence that the whole team sizes and builds against. The exclusion list IS the deliverable.',dod:'2–3pg scope doc reviewed by Jatin + Vaibhav; sized. No build before close.',sub:['Graph level: user level vs workspace level vs agent-trace vs studio edges — decide what phase 1 builds','Memory scopes: user/studio/workspace','Define the ONE proving demo','Phase-2/3 exclusion list','Review + size','FOLLOW-UP (board #493): close out arch team reviews — Arbind, board est 5d, Todo (verify est Monday)'],dep:'—',risk:'Scope creep into v0.9 vision — the exclusion list IS the deliverable.'},
+ {id:'WS-08',lane:'L2',t:'Persistent memory + memory in unified UI',own:'Vaibhav (substrate, w/ Arbind in loop) · Akshit (UI)',goal:'Memory the user can SEE: preferences and learnings visible in the unified UI, editable, and visibly used by chat across sessions.',dod:'Write/version/namespace/retrieve + ACL + migration; survives restart in prod. UI: memory panel (prefs + learnings w/ source/scope/date, edit/delete) + "used memory" chat indicator.',sub:['Gap audit vs Jul 6–8 merges: what the recent memory work already covers vs this scope. Required: list of what is actually left','Versioning + namespacing: every memory item versioned and scoped (user/studio/workspace). Required: schema + migration story','Retrieval API','Auto-retrieve hook in chat','ACL enforcement on read','Migrate brain data','Memory UI panel: user sees their preferences + learnings (source, scope, date); edit/delete PERSONAL memory only in v1 (workspace-scope management goes to CI phase-1 scope). Required: govern your own memory, not a black box','"Used memory" indicator','E2E demo: set pref → see in UI → next session uses it'],dep:'WS-07; WS-10 shell',risk:'Arbind needs a co-builder or wk-2 start.'},
+ {id:'WS-09',lane:'L2',t:'Collective Intelligence build lane — Praxis series 1–5 + reasoning graph + graph-first answering',own:'Arbind · bk Vaibhav',st:'prog',goal:'EVERYTHING lies in the reasoning graph: every human action (feedback, policy audits, connector adds) and every agent action (runs, deviations, failure clusters). And the graph is USED at query time: graph tries to answer first, LLM is the fallback — that is the cost + latency play. Arbind executes this as ONE continuous task; the Praxis 1–5 ticket series on the GitHub board is the source of truth for progress.',dod:'Per board (Jul 24): umbrella #2268 closed = PLANNING done (series decomposed, not built). Praxis 3/5 knowledge graph in PROD QA · 4/5 production readiness (CI, ECS deploy, promotion) BLOCKED · remaining parts queued · WS-09 #2 (graph phase 1 + optimizations) Sprint 71 · WS-29 phase plan in progress. Done = series through production readiness + graph-first answering demoable.',sub:['Praxis planning/decomposition (umbrella #2268) — DONE','Praxis 3/5 knowledge graph — PROD QA w/ Rabia (in review)','Praxis 4/5 production readiness: CI, ECS deploy, promotion — BLOCKED (name the blocker at go/no-go)','Praxis 5/5 + remaining series parts — queued','WS-09 #2: graph (agent + human) phase 1 + optimizations — Sprint 71','Graph-first answering: graph attempts answer BEFORE LLM; measurable cost/latency win','Reuse explainability graph viz; demo needing both node types'],dep:'WS-07 scope doc (WS-29 phase plan formalizes phases); WS-08 memory scopes',risk:'4/5 BLOCKED is the gate to calling anything production-real; phase plan being written behind the build — finish it so phases stop being implicit.'},
+ {id:'WS-10',lane:'P1',t:'True studio unification (kill redirects)',own:'Surjoyday · bk Akshit',st:'prog',goal:'One shell, zero redirects. A user never leaves the unified surface, no new tabs, no legacy URLs.',dod:'Zero redirects; session continuity; prod serves unified; redirect code deleted; Rabia sign-off.',sub:['Inventory every remaining redirect: list every place we route out of the shell (agents/govern, creator, others). Required: the checklist we kill one by one','Integrate studio surface into shell','Auth/session continuity: user stays logged in and in-context across all surfaces. Required: no re-login, no state loss','Route prod x.asq.studio → unified','Creator Studio decision IN WRITING: unify or keep legacy','QA click-through + delete redirects'],dep:'Pre-window prod push',risk:''},
+ {id:'WS-27',lane:'P1',t:'SOC 2 program (Vanta) — GATES FORWARD DEPLOYMENT — FRONT-LOADED',own:'Jatin · sponsor Aditya',st:'prog',goal:'Ready to enter the OBSERVATION PHASE: every task on Vanta resolved — by running an agent on it or doing it manually — so the clock can actually start. Gap assessment by Jul 18; evidence collecting automatically.',dod:'REFRAMED Jul 24: gap assessment IN PROGRESS — completion reviewed at Monday go/no-go (original Jul 18 target passed; no new public date). Backend-ops hire not factored in. Gap assessment done; evidence collection running; policies pack; encryption doc (answers Falkovia Q1); MetricStream commitment clarified IN WRITING + delivered; Type 2 window locked.',sub:['Pin down MetricStream commitment precisely','Vanta gap scan vs Type 1','Close top control gaps (WS-26 doubles as controls)','Policies pack (infosec/access/IR/vendor)','Encryption at-rest/in-transit doc','Resolve ALL Vanta tasks (agent-run or manual) — observation phase cannot start with open items','Evidence automation on','Lock Type 2 window start'],dep:'WS-26',risk:'Gates forward deployment — every enterprise deal (MetricStream, IKS, WF, Verizon, Lockheed) asks for it. Delegate evidence work wk1 or WS-17/WS-03 slips.'},
+ {id:'WS-11',lane:'P1',t:'Govern mode completion + explainability PROD QA wave',own:'Arbind · bk Jatin',st:'overdue',goal:'Govern mode verified placeholder-free in production. Closing a June wound, permanently.',dod:'Jul 13: drill-down, export, demo gate all reported done. Remaining: QA verification sweep only (trust but verify).',sub:['Violation drill-down','Export (JSON first, PDF later)','QA sweep for residual placeholders','Demo gate'],dep:'Pre-window wiring; WS-08 store. Engine-to-shell + real KPIs already done (verify).',risk:''},
+ {id:'WS-12',lane:'P1',t:'Govern UI v2 — unified shell + developer/X portal',own:'Prince (design) → Akshit (build) · validation Vaibhav & Arbind',st:'prog',goal:'Intuitive on BOTH surfaces — the unified shell AND the developer/X portal: intuitive UI, intuitive navigation, self-help scenarios built in. A compliance officer or a developer completes their core tasks unaided.',dod:'Persona task pass unaided (24h runs → drill → export); design FREEZE end wk2 — no late flow rewrites.',sub:['1-day UX audit of v1','Flows for 3 compliance-officer tasks: see runs touching customer data in 24h → drill into a decision → export a report. Required: untrained user completes all 3','Developer/X portal: same v2 treatment — intuitive UI + navigation there too','Self-help scenarios: in-context guidance so users never need a teammate to explain a screen','Design review w/ real-data constraints','Handoff spec','Build on WS-15 components','Usability click-through'],dep:'WS-11 (real data first); WS-15',risk:''},
+ {id:'WS-13',lane:'P1',t:'Connectors: 6 live (ingress + egress v1)',own:'Anmol (lane) · Surjoy (GitHub)',st:'prog',goal:'Six connectors a customer can actually use end to end (auth to studio to doc), with Slack and Gmail reading AND writing.',dod:'Live = auth + ingest + vault check + in studio + smoke + doc. Six: GitHub, Slack, Salesforce, Jira, Notion, OneDrive (Dropbox 7th). Slack + Gmail: ingress AND egress in v1, Slack incl. bot support (Jul 13 decision). S3/SharePoint SHELVED → future vault-improvement ticket.',sub:['GitHub: land PRs, smoke test, doc (wk1) — testing is the remainder','Composio batch: Slack, Salesforce, Notion, Jira — ingress + egress','Slack bot support (team-wide sends, not personal-account)','OneDrive/Dropbox test + deploy','Fix vault fall-through bug','Fix UTC-vs-user-timezone bug (chat-level)','Fix Gmail 3-chunk fetch','Harden + doc /create composio connector','RESEARCH (Anmol): team/workspace connector scoping — mixed ingress(team)/egress(personal), attribution problem, UX — findings before build'],dep:'—',risk:'"Live" definition agreed at sizing or June "WIP on release night" repeats.'},
+ {id:'WS-14',lane:'P1',t:'Pricing & payment gateway integration',own:'Surjoyday',st:'prog',goal:'A customer can pay us: sandbox purchase goes through and credits decrement on real usage.',dod:'Sandbox purchase → credits decrement on real usage. Step 0: Aditya publishes Unified Pricing (int + ext) in planning week — the build contract.',sub:['Gateway choice: Stripe vs Razorpay, decided by INR requirement + fees + effort. Required: decision doc, not a debate','Credit unit + metering source: define 1 credit and which platform events consume it. Required: aligned to Aditya\'s published pricing doc','Tier config + BYOK $0 path','Decision doc → Aditya + Scott','Gateway integration (sandbox)','Metering events','Credit ledger: balance per account, decremented by metering events, auditable. Required: the source of truth for billing','One tier purchasable','Consumption visible to user'],dep:'Aditya\'s Unified Pricing doc (planning wk)',risk:'Surjoy also owns WS-10 — build lands wk 2–3.'},
+ {id:'WS-15',lane:'P1',t:'Design system v1 + brand alignment — EXPANDED & FRONT-LOADED (Jul 13)',own:'Prince + Akshit',st:'prog',goal:'One visual language everywhere: published UI library + reusable components, design system published on Figma, published GTM asset templates — AND an easy way for AGENTS to consume the components and design library, so generated UI comes out on-brand by default.',dod:'Tokens + components in @aisquare/ui; 2 surfaces migrated; brand guidelines; adoption rule; GTM asset Figma templates (MSA/SOW/NDA); corporate deck Keynote→Figma brand-aligned; website + deck aligned. Front-loaded: June/July designs arrived too late (Jatin).',sub:['Audit existing registry','Token set (color/type/spacing)','Component order driven by WS-12 + WS-16','Publish @aisquare/ui versioned','Publish the design system on Figma (or equivalent): tokens, components, usage','Agent consumption path: components + library structured so coding agents can discover and use them (docs/manifest/llms.txt for the design system)','Migrate ALL surfaces holistically (Aditya decision): every surface consumes the library; sequence by component readiness, govern UI v2 first','Brand guidelines doc','GTM asset Figma templates: MSA, SOW, NDA (shared header/footer)','Corporate deck: Keynote → Figma, brand-aligned','Website + deck alignment check','Adoption rule → engineering/rules.md'],dep:'—',risk:''},
+ {id:'WS-16',lane:'P1',t:'Marketing website — P0 SLICE: homepage + messaging by Aug 7 (RULING Jul 24)',own:'Aditya (messaging) + Prince (UI + build)',st:'prog',goal:'RULING (Aditya, Jul 24): scope-sliced. The P0 slice — new homepage + collective-intelligence messaging + SEO/LLM pass on it — ships by Aug 7 (~5–6d Prince). The FULL site (complete sitemap, all-page content fixes, detailed sections; Prince est 12–15d total) becomes WS-16b, an August workstream. This resolves the 4d-vs-12–15d conflict.',dod:'By Aug 7: staged homepage on new messaging + visual system; SEO/GEO pass (llms.txt, structured data) on the shipped slice; Gunjan review. Everything else = WS-16b (August).',sub:['Messaging doc (collective-intelligence narrative) — in progress','Homepage design on WS-15 tokens (Prince)','Homepage build on homepage-Next base (Prince, ~5d slice)','SEO/GEO pass on the slice before launch','Gunjan pre-launch review','WS-16b (AUGUST, not this cycle): full sitemap, content fixes across pages, detailed subpages — Prince est ~7–9d remaining'],dep:'WS-15 tokens',risk:'P0 stands for the slice. Prince cut order updated: GTM templates + MetricStream day cut before the slice; govern UI design protected.'},
+ {id:'WS-17',lane:'P1',t:'Policy versioning & rollback (mid-Aug commit — BACKLOG CANDIDATE per Jul 13; sizing decides)',own:'Jatin · bk Arbind',goal:'Policies become first-class versioned objects with diff and rollback. Covers the Falkovia/Axis mid-Aug commitment.',dod:'Build shifts wk 2–3 (SOC 2 front-load). Version store (immutable history); diff view; rollback API + verdict-cache invalidation; attestation of rollback; history/diff/rollback UI. July = core; mid-Aug ship.',sub:['STEP 0: size BEFORE Falkovia email commits date','Design doc: what rollback MEANS — cached verdicts invalidated how, concurrent edits resolved how, history immutable. Required: answers Falkovia Q5','Version store + edit hooks','Diff view','Rollback API + invalidation','Attestation of rollback events','UI: history/diff/trigger','Staging test incl. concurrent-edit'],dep:'—',risk:'External date committed on a call before sizing — classic June pattern; size first.'},
+ {id:'WS-18',lane:'P1',t:'Cost lane',own:'Arbind + Vaibhav + Jatin (narrative)',st:'prog',goal:'The cost story becomes quantified and sellable: daily data, markup matrix, customer-facing comparison artifacts.',dod:'Cost story quantified, repeatable, sellable.',sub:['Daily cost cron (low/high/avg + markup + rules)','S/M/L/XL markup matrix','SLM rerun at large n','Model-comparison tests → Falkovia artifact','Findings memo to Scott','Revise trace-storage cost target','Document the 60–70% reduction method','Research: fusion model approach (Anmol) — model-mix for intelligence vs cost'],dep:'—',risk:''},
+ {id:'WS-19',lane:'P1',t:'Judge-quality research',own:'Rabia (owner) · Vaibhav guides — reassigned Jul 24 (phase 2 was unassigned on board)',goal:'Know with data whether the cheap-judge tier is real. Keep the claim or pull it from every pitch.',dod:'Agreement measured at large n vs threshold (~80%). HARD GATE: below threshold end wk3 → cheap-judge claim OUT of all pitches.',sub:['RML-in-judge experiment','Semantic-closeness scoring eval','Large-n agreement measurement (TL-119)','Threshold decision + go/no-go on the claim'],dep:'WS-18 instrumentation',risk:'Gates the SLM cost tier claims to Falkovia et al.'},
+ {id:'WS-20',lane:'P1',t:'Evals & QA machinery — OWNS COMPLETE EVALS ROADMAP',own:'Rabia',goal:'Evals become the quality gate for everything shipped: CI/CD hard blocker, failure corpus, weekly cadence, visible trend.',dod:'Rabia owns ALL evals: chat quality, LLM-judge (WS-19 tie), agentic QC. Evals in CI/CD: below threshold = HARD BLOCKER. Handoff md; roadmap; corpus pipeline; regression cadence; quality trend.',sub:['Evals → CI/CD gate w/ hard blocker below threshold','Eval architecture md handoff (OVERDUE)','Evals roadmap','Failure-case corpus pipeline','Weekly regression cadence','Prompt-change manual trigger rule ($12/600)','Quality trend from ~60%'],dep:'—',risk:''},
+ {id:'WS-21',lane:'P1',t:'AP3 integration phase 1 — PARKED P2, Aug 3–7 (blessed Jul 24)',own:'Jatin · bk Arbind',goal:'AP3-verified traces visible in explainability; ready to demo if the Lockheed call lands.',dod:'APIs tested; "AP3-verified" badge scoped + rendered on qualifying traces; Lockheed decision wk3.',sub:['Reply to AP3 + send docs site (this week)','Test their APIs','Scope AP3-verified badge','Implement verify + display','GATE: Lockheed call signaled by Fri Jul 17 → pull forward; else wk3'],dep:'—',risk:'Jul 17 Lockheed gate did not fire → board parked it P2 for Aug 3–7; parking blessed by Aditya Jul 24.'},
+ {id:'WS-22',lane:'P1',t:'OSS lane execution — EXPANDED (Jul 13)',own:'Anmol (SDK) + Surjoy/Rabia (page/docs)',goal:'AISquare code in public developer hands: Lite SDK on PyPI, /developers page live, pipe documented, Cloud CLI scoped.',dod:'Lite SDK on PyPI; /developers page live; example project; pipe documented; ASQ Cloud CLI scoped; DevRel hire raised w/ Gunjan THIS WEEK (Aditya + Scott).',sub:['License decision + repo scaffold','Extract Lite SDK (subtraction, not new build)','PyPI publish under AISquare-Studio','/developers page (SSR, demo, 3-line install)','Pipe documentation up to standard','AI Square Cloud CLI: scope doc (OSS CLI + paid cloud front)','Example project','DevRel hire: Aditya raises w/ Gunjan (+Scott) this week','Soft launch aligned to readiness'],dep:'—',risk:''},
+ {id:'WS-23',lane:'P1',t:'Team OS / TMOS',own:'Prince + Rabia · bk Aditya',st:'review',goal:'Team OS installed and used by the whole team this week; PRD closed with Gunjan; board v0 exists.',dod:'Installable app in whole team\'s hands; PRD closed w/ Gunjan; graphify answer sent; board v0.',sub:['Brew install process documented + icon polish','Team handoff Friday (ship now, refine later)','PRD sent to Gunjan — DONE','gbrain implemented in Team OS (Rabia) — DONE; no standalone graphify task remains (#29 closed; Jatin favored gbrain over graphify)','Team board (workload/effort) v0'],dep:'—',risk:''},
+ {id:'WS-24',lane:'CUST',t:'Customer cluster',own:'per team-loops',goal:'Every dated customer commitment met or consciously renegotiated. Never silently missed.',dod:'Every dated commitment met or consciously re-negotiated — never silently missed.',sub:['Nasiko: docs before Mon; PoC scope; execution wk Jul 13','Falkovia: 7 answers + rollback timeline in formal email','Lockheed: CREATE Jul 14 invite (missing); demo prep','WF: 2052A POC + video + deck (Scott)','MetricStream: fixes ~5d + deploy + 1 QA round + UI modernization; Prince 1 day','MetricStream CONTRACT data repository (confirmed): plan + build (Aditya Saini + Anmol) after fixes + Priya QA sign-off','Skit: NDA chase; latency SLA = WS-04 output','AlphaStreet: docs → call +2d → debate-agent integration; POC success criteria (Aditya)','Verizon success (Aditya): ADK Jul 14, Galileo counter-positioning, Jul 28 deep-dive','Axis Max success (Aditya): pricing chase closed, v2 re-engage, rollback talking point'],dep:'',risk:''},
+ {id:'WS-25',lane:'P1',t:'Competitor research',own:'Vaibhav drives · Aditya joins post-onboarding · NOTE: board umbrella downgraded to P2',st:'review',goal:'Know exactly where we beat Galileo and Trustwise — a benchmark-style comparison across multiple parameters (features, pricing, latency, output quality), written down. AND learn from them: their UI patterns, how they structure user flows — feed that into our own design work.',dod:'Both demos taken via non-obvious persona; feature matrix + advantage analysis; REQUIRED OUTPUT: competitive-advantage messaging doc — 2–3 crisp statements (Scott).',sub:['Book Galileo + Trustwise demos (non-obvious persona; possibly external contact)','Rubric BEFORE demos: parameters = features, pricing, latency, output quality, UI/UX patterns, user-flow structure','Attend + capture (Vaibhav; Aditya once onboarded); run real tasks to measure performance/latency/quality','Benchmark-style comparison matrix across all parameters','UI/flow learnings write-up → Prince (WS-12/15 input)','Competitive-advantage messaging doc (2–3 statements) → Scott','Hand to Scott (one-pager + battle card)'],dep:'',risk:''},
+ {id:'WS-26',lane:'PROC',t:'Process fixes live — NON-DESCOPABLE',own:'Aditya + Rabia',goal:'The tracking loop that makes every other DoD enforceable. This is how June does not repeat.',dod:'All gates operating by end of planning week.',sub:['CI (lint/type/test) required on release repos','AUTO QA on every PR','Branch protection + 1 independent reviewer','2pm release-for-QA line','Critical-path list posted','Individuals size own work; Aditya combines + publishes','Accountability checklist after sizing lands','Board w/ estimates = burndown','Weekly recorded go/no-go (RYG)','Wk-1 landing check: every DRI has merged code'],dep:'',risk:'This makes every other DoD enforceable. Does not get descoped.'},
+ {id:'WS-30',lane:'P1',t:'Active monitoring system (Sentry-style) — NEW Jul 13',own:'Jatin · wk 2–3',goal:'We find out about degradation before a developer or customer does. Manual experiment runs disappear.',dod:'Latency/response-degradation alerts live incl. test deployments; WS-03 eval sets wired as continuous checks; supersedes manual ECS re-benchmarks; Sentry evaluated as base.',sub:['Alert triggers: define the thresholds that page us (latency, span degradation, slow deploy tests). Required: we know before the dev does','Wire WS-03 enforcement eval set as scheduled checks','Wire WS-01 continuous suite output','Notification routing (who gets paged)'],dep:'WS-01, WS-03; starts after SOC 2 gap assessment',risk:''},
+ {id:'WS-31',lane:'P1',t:'Pre-built regulatory rule books — roadmap item, demand-prioritized',own:'Unassigned (Surjoyday flagged when it starts)',goal:'Pre-built regulatory rule books exist on the roadmap and activate the moment a customer asks. Scott is already selling this.',dod:'Top 10–20 regulatory books in-platform w/ update-push connectors + blast radius. Databricks signal; Scott already selling it. NOT in this cycle — prioritized on first customer request.',sub:['Scope on first demand','Pairs with WS-17 versioning/rollback'],dep:'WS-17',risk:''},
+ {id:'WS-29',lane:'P1',t:'Praxis learning loop — phase plan (written)',own:'Arbind · wk 1 · 1-day cap',st:'prog',goal:'Praxis has a written phase plan before Q3 arrives, so it is planned work, not a September surprise.',dod:'STATUS Jul 24: in progress (#1). The Praxis SERIES is being executed as tickets on the board while this plan doc completes — finish the doc so phase boundaries + the Q3 Falkovia commitment are written, not implicit. Written doc: loop definition, phase-1 scope, deps on WS-06/08/11, Q3 milestones; reviewed by Aditya + Jatin.',sub:['Loop definition + phase boundaries','Dependency map: WS-06 extraction, WS-08 memory capture, WS-11 enforcement','Q3 milestone proposal (what demos when)','Review w/ Aditya + Jatin'],dep:'Q3 Falkovia commitment (Jul 9 call)',risk:'1-day hard cap — Arbind is the most loaded person in the plan.'},
+ {id:'WS-32',lane:'P1',t:'Agent Fleet + orchestration harness — NEW (board, Jul 20)',own:'Jatin + Surjoy · Akshit joins final week',st:'prog',goal:'Fleet-level agent orchestration: the harness that runs and coordinates multiple agents on the platform. Surfaced on the board Jul 20 (follow-up: review + close out, 5d, In Progress); Akshit assigned for the final week per Jul 23 huddle.',dod:'Harness reviewed + closed out (#498); scope for fleet v1 written before Akshit joins wk3 so his week is build, not discovery.',sub:['Review + close out orchestration harness (#498) — Jatin + Surjoy, in progress','Write fleet v1 scope before Akshit joins (what he builds in wk3)','Akshit: fleet build, final week (Aug 3–7)'],dep:'WS-10 shell; runtime',risk:'Unplanned scope absorbed mid-cycle — watch it does not eat govern UI build time.'},
+ {id:'WS-28',lane:'STR',t:'Audience / Adoption Manager — SHELVED (Jul 13)',own:'Aditya Saini (scoping doc only)',st:'blocked',goal:'Scoping doc reaches Gunjan; the feature is consciously shelved with a written rationale, not silently dropped.',dod:'Removed from active roadmap: add-on / possible spin-off, not core — trust drives adoption, so the trust stack wins. Survives: 0.5d scoping doc to Gunjan w/ explicit deprioritization note. Freed capacity → MetricStream contract-data-repo + Arbind/Vaibhav overflow.',sub:['Scoping doc → Gunjan (0.5d, planning wk). Must cover: how it works with the NEW user flow + new UI; which connectors it uses; how it self-promotes (nudges into Slack etc.); why it matters; an example user journey; enterprise integration for employee lists (HRMS or similar, or via Slack)','Revisit only if explainability tie-in found (Anmol brainstorm; UBS adoption-pain signal)'],dep:'—',risk:''}
+];
+
+/* person, ws, title, start(0-19), dur, est(days), lane, scope bullets, dated flag/text */
+const A=[
+ // Aditya Jaiswal
+ {p:'Aditya Jaiswal',ws:'WS-26',t:'Gates live w/ Rabia (CI, auto-QA/PR, reviewer, 2pm line, go/no-go)',s:0,d:3,e:1.5,l:'PROC',sc:['Repo gates + board + critical-path list','Rabia builds auto-QA pipeline; Aditya wires cadence'],st:'overdue'},
+ {p:'Aditya Jaiswal',ws:'WS-14',t:'Unified Pricing — internal + external — finalize & PUBLISH',s:0,d:3,e:2,l:'P1',sc:['Internal cost/markup model + external tiers','Published doc = Surjoyday\'s build contract']},
+ {p:'Aditya Jaiswal',ws:'WS-24',t:'Falkovia formal email (Nasiko scope lock → moved to Aditya Saini + Anmol)',s:0,d:2,e:1,l:'CUST',sc:['Rollback date included only after Jatin sizes','Nasiko scope written before execution wk']},
+ {p:'Aditya Jaiswal',ws:'WS-07',t:'CI phase-1 scope spike (w/ Arbind + Jatin)',s:2,d:3,e:1.5,l:'L2',sc:['Graph level + memory scopes + ONE demo','Exclusion list; reviewed by Vaibhav'],st:'done'},
+ {p:'Aditya Jaiswal',ws:'WS-26',t:'Combine sizing → accountability checklist → publish to team',s:3,d:2,e:1.5,l:'PROC',sc:['Individuals size own work by Wed EOD','Checklist: items/estimates/dates/backups per person','Publish capacity math + cuts proposal'],dated:'Jul 15 sizing due'},
+ {p:'Aditya Jaiswal',ws:'WS-16',t:'Website messaging doc + sitemap + page copy',s:5,d:5,e:3,l:'P1',sc:['Collective-intelligence narrative (Gunjan/WF language)','Copy handed to Prince for wk3 build'],st:'prog'},
+ {p:'Aditya Jaiswal',ws:'WS-24',t:'AlphaStreet POC success criteria',s:5,d:2,e:0.5,l:'CUST',sc:['Measurable, agreed w/ Wasikul pre-judgment'],st:'overdue'},
+ {p:'Aditya Jaiswal',ws:'WS-25',t:'Competitor demos + advantage analysis (w/ Vaibhav)',s:6,d:7,e:1.5,l:'P1',sc:['Rubric first; Galileo + Trustwise','Matrix + analysis → Scott']},
+ {p:'Aditya Jaiswal',ws:'WS-24',t:'Verizon success: deep-dive prep (Jul 28)',s:10,d:2,e:1,l:'CUST',sc:['ADK shown, Galileo counter-positioning ready'],dated:'Jul 28'},
+ {p:'Aditya Jaiswal',ws:'WS-24',t:'Axis Max: close pricing chase / v2 re-engage',s:12,d:3,e:0.5,l:'CUST',sc:['Rollback/versioning as talking point']},
+ {p:'Aditya Jaiswal',ws:'WS-26',t:'Weekly go/no-go + landing checks (RYG)',s:5,d:15,e:1.5,l:'PROC',sc:['Recorded; RYG per workstream; wk-1 merged-code check']},
+ {p:'Arbind',ws:'WS-07',t:'CI spike follow-up: close out arch team reviews (#493)',s:5,d:10,e:5,l:'L2',sc:['Board est 5d — VERIFY at Monday go/no-go (looks like an auto-created follow-up)']},
+ {p:'Arbind',ws:'WS-11',t:'E1/E2/E4 explainability PROD QA wave (3 tickets, w/ Rabia)',s:5,d:10,e:7.5,l:'P1',st:'overdue',sc:['Board est 15d combined across pair — verify at go/no-go','Rule config, action categories, SDK enforcement in PROD']},
+ {p:'Rabia',ws:'WS-11',t:'Policy generation (source=github) PROD QA (#172, w/ Aditya J + Vaibhav)',s:5,d:10,e:2,l:'P1',st:'overdue',sc:['Board 5d shared across three assignees']},
+ {p:'Rabia',ws:'WS-11',t:'E1/E2/E4 explainability PROD QA wave (w/ Arbind)',s:5,d:10,e:7.5,l:'P1',st:'overdue',sc:['Board est 15d combined across pair — verify at go/no-go']},
+ {p:'Jatin',ws:'WS-32',t:'Agent Fleet: orchestration harness review + close out (w/ Surjoy)',s:5,d:10,e:2.5,l:'P1',st:'prog',sc:['#498; write fleet v1 scope before Akshit joins wk3']},
+ {p:'Surjoyday',ws:'WS-32',t:'Agent Fleet: orchestration harness (w/ Jatin)',s:5,d:10,e:2.5,l:'P1',st:'prog',sc:['#498']},
+ {p:'Akshit',ws:'WS-32',t:'Agent Fleet build — final week (per Jul 23 huddle)',s:15,d:5,e:2,l:'P1',sc:['Scope written by Jatin/Surjoy before start']},
+ {p:'Akshit',ws:'WS-14',t:'Pricing/credits UI w/ Surjoy — NEXT WEEK (Jul 27–31, per Jatin)',s:10,d:5,e:2,l:'P1',sc:['UX research: credit UI patterns from other AI platforms','Then govern v2 build in the final week']},
+ {p:'Surjoyday',ws:'WS-14',t:'Credits: combine unified + BE + explainability into ONE service (#2921)',s:5,d:5,e:5,l:'P1',st:'overdue',sc:['Architecture unification — new board ticket, Todo past Jul 24']},
+ {p:'Surjoyday',ws:'WS-10',t:'AIKO/Atlas chat polish cluster (4 tickets) + Draft policy QA',s:5,d:10,e:3,l:'P1',st:'prog',sc:['#2644/#2645/#2670/#2671 + #497 — absorbed into stabilization']},
+ {p:'Aditya Jaiswal',ws:'WS-14',t:'Unified Pricing contract doc — STILL OWED (called out in both Jul 23 huddles)',s:5,d:10,e:1,l:'P1',st:'overdue',sc:['Surjoy + Akshit build against this; every day late blocks them']},
+ {p:'Aditya Jaiswal',ws:'WS-26',t:'QA buffer week — regression + release QA (no new development)',s:20,d:5,e:0,l:'PROC',sc:['Rolling regression closure, release readiness']},
+ {p:'Aditya Saini',ws:'WS-26',t:'QA buffer week — regression + release QA (no new development)',s:20,d:5,e:0,l:'PROC',sc:['Rolling regression closure, release readiness']},
+ {p:'Akshit',ws:'WS-26',t:'QA buffer week — regression + release QA (no new development)',s:20,d:5,e:0,l:'PROC',sc:['Rolling regression closure, release readiness']},
+ {p:'Anmol',ws:'WS-26',t:'QA buffer week — regression + release QA (no new development)',s:20,d:5,e:0,l:'PROC',sc:['Rolling regression closure, release readiness']},
+ {p:'Arbind',ws:'WS-26',t:'QA buffer week — regression + release QA (no new development)',s:20,d:5,e:0,l:'PROC',sc:['Rolling regression closure, release readiness']},
+ {p:'Jatin',ws:'WS-26',t:'QA buffer week — regression + release QA (no new development)',s:20,d:5,e:0,l:'PROC',sc:['Rolling regression closure, release readiness']},
+ {p:'Prince',ws:'WS-26',t:'QA buffer week — regression + release QA (no new development)',s:20,d:5,e:0,l:'PROC',sc:['Rolling regression closure, release readiness']},
+ {p:'Rabia',ws:'WS-26',t:'QA buffer week — regression + release QA (no new development)',s:20,d:5,e:0,l:'PROC',sc:['Rolling regression closure, release readiness']},
+ {p:'Surjoyday',ws:'WS-26',t:'QA buffer week — regression + release QA (no new development)',s:20,d:5,e:0,l:'PROC',sc:['Rolling regression closure, release readiness']},
+ {p:'Vaibhav',ws:'WS-26',t:'QA buffer week — regression + release QA (no new development)',s:20,d:5,e:0,l:'PROC',sc:['Rolling regression closure, release readiness']},
+ {p:'Aditya Saini',ws:'WS-24',t:'Nasiko PoC scope lock (#476, w/ Anmol) — ownership moved from Aditya J',s:3,d:7,e:1,l:'CUST',st:'overdue',sc:['Board dates Jul 16–17 passed; close it or re-date']},
+ {p:'Anmol',ws:'WS-24',t:'Nasiko integration work — Sprint 71 umbrella (#495)',s:10,d:5,e:5,l:'CUST',sc:['Board est 5d — Anmol owns Nasiko integration now']},
+ {p:'Aditya Saini',ws:'WS-24',t:'MetricStream credit-based pricing (dev + QA to Sat handoff)',s:3,d:6,e:3,l:'CUST',st:'prog',sc:['Board #57, in progress']},
+ {p:'Anmol',ws:'WS-22',t:'OSS strategy email to Gunjan (DevRel push)',s:5,d:5,e:2,l:'P1',st:'prog',sc:['Board #496 — the DevRel-hire conversation moving']},
+ {p:'Prince',ws:'WS-15',t:'CIO Summit pamphlet + flex banner + standee (unplanned GTM)',s:5,d:5,e:2,l:'P1',st:'review',sc:['Absorbed unplanned; from Prince Jul 20 email + board #499']},
+ // Aditya Saini
+ {p:'Aditya Saini',ws:'WS-28',t:'Audience Manager scoping doc → Gunjan (feature SHELVED)',s:0,d:1,e:0.5,l:'STR',sc:['Owed to Gunjan for months; sent w/ deprioritization note'],st:'blocked'},
+ {p:'Aditya Saini',ws:'WS-24',t:'MetricStream: Priya fixes + dev deploy + single QA round',s:0,d:8,e:5,l:'CUST',sc:['~5d fixes; deploy w/ Anmol; Rabia re-QA once']},
+ {p:'Aditya Saini',ws:'WS-24',t:'MetricStream CONTRACT data repository: plan + build (w/ Anmol)',s:10,d:10,e:4,l:'CUST',sc:['Starts after fixes + Priya QA sign-off','Replaces shelved Audience Manager build']},
+ {p:'Aditya Saini',ws:'WS-27',t:'SOC 2 background evidence support (during MetricStream downtime)',s:5,d:5,e:1,l:'P1',sc:['Drives Vanta evidence collection under Jatin']},
+ // Akshit
+ {p:'Akshit',ws:'WS-12',t:'Govern UI v1 audit — worked w/ Prince (wk-1 actual)',s:5,d:5,e:1.5,l:'P1',st:'done',sc:['Audit #489 closed; Akshit paired w/ Prince on flows/context (Jul 23 huddle)']},
+ {p:'Akshit',ws:'WS-10',t:'Onboarding flow improvements (wk-1 actual)',s:5,d:5,e:1.5,l:'P1',st:'done',sc:['Self-serve onboarding polish in the unified shell']},
+ {p:'Akshit',ws:'WS-11',t:'PQA tickets (wk-1 actual, continuing)',s:5,d:5,e:1.5,l:'P1',st:'prog',sc:['Prod QA verification tickets alongside the E-wave']},
+ {p:'Akshit',ws:'WS-15',t:'Registry audit + token groundwork (w/ Prince)',s:1,d:3,e:1.5,l:'P1',sc:['What exists in @aisquare/ui registry today'],st:'done'},
+ {p:'Akshit',ws:'WS-15',t:'Components/registry implementation (ongoing; follows Prince\'s DS start Jul 27)',s:10,d:10,e:4,l:'P1',st:'prog',sc:['Registry AUDIT (#219) done; implementation continues','Sequenced AFTER Prince starts the design system','Migrate surfaces holistically per Jul 13 ruling']},
+ {p:'Akshit',ws:'WS-12',t:'Govern UI v2 build — LAST WEEK per Jatin (validation: Vaibhav + Arbind)',s:15,d:5,e:5,l:'P1',sc:['Jul 23 huddle: pricing w/ Surjoy next week; govern build starts final week','On Prince\'s flows + WS-15 components','COLLIDES with memory panel + Agent Fleet in the same week — cut decision Monday']},
+ {p:'Akshit',ws:'WS-08',t:'Memory UI panel + "used memory" indicator',s:15,d:5,e:3,l:'L2',sc:['List/filter/edit/delete; source+scope+date','Chat indicator when memory used']},
+ // Anmol
+ {p:'Anmol',ws:'WS-01',t:'ECS stress/load tests (w/ Vaibhav)',s:0,d:3,e:2,l:'L1',sc:['Matrix, isolated env, budget cap, run, tables'],st:'overdue'},
+ {p:'Anmol',ws:'WS-13',t:'OneDrive/Dropbox test + deploy',s:3,d:2,e:1,l:'P1',sc:['Already built — verify + ship']},
+  {p:'Anmol',ws:'WS-13',t:'Composio batch: Slack, Salesforce, Notion, Jira — ingress + egress',s:5,d:7,e:6.5,l:'P1',sc:['Live = auth+ingest+vault+studio+smoke+doc','Egress on all four; Slack bot support (Jul 13 decision)'],st:'prog'},
+ {p:'Anmol',ws:'WS-13',t:'Connector bugs: vault fall-through, UTC TZ, Gmail chunks',s:5,d:3,e:1.5,l:'P1',sc:[],st:'overdue'},
+ {p:'Anmol',ws:'WS-24',t:'MetricStream dev deploy (w/ Aditya Saini)',s:7,d:1,e:0.5,l:'CUST',sc:[],st:'review'},
+ {p:'Anmol',ws:'WS-13',t:'/create composio connector hardening + doc',s:10,d:2,e:1,l:'P1',sc:[]},
+ {p:'Anmol',ws:'WS-13',t:'Research: team/workspace connector scoping (ingress/egress split, attribution, UX)',s:10,d:3,e:1,l:'P1',sc:['Findings before any build (Jul 13)']},
+ {p:'Anmol',ws:'WS-18',t:'Research: fusion model approach',s:12,d:3,e:1.5,l:'P1',sc:['Model-mix for intelligence vs cost (arch call Jul 9)','Scope at sizing']},
+ {p:'Anmol',ws:'WS-22',t:'OSS Lite SDK extract + PyPI publish',s:15,d:5,e:3,l:'P1',sc:['Subtraction from existing SDK; license + org']},
+ // Arbind
+ {p:'Arbind',ws:'WS-05',t:'Tri-provider proxy finish + FE paste-prompt',s:0,d:3,e:1.5,l:'L1',sc:['OpenAI + Gemini tests; config doc; setup doc'],st:'done'},
+ {p:'Arbind',ws:'WS-24',t:'AlphaStreet integration docs + follow-up call',s:0,d:4,e:1,l:'CUST',sc:['Self-serve SDK setup; call +2 days after docs']},
+ {p:'Arbind',ws:'WS-07',t:'CI phase-1 scope spike (w/ Aditya + Jatin)',s:2,d:3,e:1.5,l:'L2',sc:[],st:'done'},
+ {p:'Arbind',ws:'WS-11',t:'Govern completion: drill-down, export, placeholder sweep',s:5,d:3,e:2,l:'P1',sc:['Engine-to-shell + real KPIs done — QA verifies'],st:'overdue'},
+ {p:'Arbind',ws:'WS-04',t:'Latency: architecture, cut-path + scaling (front-loaded)',s:5,d:8,e:4.5,l:'L1',sc:['Baselines → SLA targets → cut-path → deterministic routing + caching → publish','Vaibhav validates; monitoring (WS-30) replaces manual re-benchmarks'],st:'prog'},
+ {p:'Arbind',ws:'WS-29',t:'Praxis phase plan (written, 1-day cap)',s:8,d:2,e:1,l:'P1',sc:['Loop: correction → lessons → rules → enforcement','Deps on WS-06/08/11; Q3 milestones','Review w/ Aditya + Jatin'],st:'prog'},
+ {p:'Arbind',ws:'WS-12',t:'Govern UI v2 validation (w/ Vaibhav)',s:10,d:2,e:0.5,l:'P1',sc:[]},
+ {p:'Arbind',ws:'WS-18',t:'Markup matrix + cost-method doc',s:10,d:3,e:1.5,l:'P1',sc:['S/M/L/XL; document the 60–70% method']},
+ {p:'Arbind',ws:'WS-09',t:'Praxis series build (single CI lane): 3/5 PROD QA, 4/5 BLOCKED, rest queued',s:5,d:10,e:6,l:'L2',st:'prog',sc:['Board = source of truth (Praxis 1–5 tickets)','Unblock 4/5 production readiness (CI, ECS, promotion)']},
+ {p:'Arbind',ws:'WS-09',t:'Graph phase 1 + optimizations (#2, Sprint 71)',s:10,d:8,e:5,l:'L2',sc:['Schema, ingestion (traces + human), query API','Graph-first answering on top of Praxis service','Constant loop w/ Vaibhav (memory)']},
+ {p:'Arbind',ws:'WS-24',t:'AlphaStreet debate-agent integration',s:13,d:5,e:2,l:'CUST',sc:['12–30 agents, real usage data']},
+ // Jatin
+ {p:'Jatin',ws:'WS-26',t:'Review-backlog burn (17 PRs) + chat regression TL-120',s:0,d:3,e:2,l:'PROC',sc:['Unblocks Surjoyday; regression vs Jun 30 build']},
+ {p:'Jatin',ws:'WS-23',t:'Graphify/gbrain answer to Gunjan',s:1,d:1,e:0.2,l:'P1',sc:['One paragraph; pending since Jul 8'],dated:'overdue'},
+ {p:'Jatin',ws:'WS-17',t:'Size rollback + design doc (BEFORE Falkovia email)',s:2,d:3,e:1,l:'P1',sc:['Semantics, cache invalidation, concurrent edits'],dated:'gates email',st:'prog'},
+ {p:'Jatin',ws:'WS-07',t:'CI phase-1 scope spike (w/ Aditya + Arbind)',s:2,d:3,e:1,l:'L2',sc:['Runtime/graph feasibility input'],st:'done'},
+ {p:'Jatin',ws:'WS-03b',t:'OpenAI BAA: initiate → legal → execute → file',s:0,d:8,e:1,l:'L1',sc:['Date + scope to GTM; evidence store'],st:'review'},
+ {p:'Jatin',ws:'WS-24',t:'Nasiko run-through + IKS technical items',s:0,d:3,e:1,l:'CUST',sc:[]},
+ {p:'Jatin',ws:'WS-03',t:'Govern robustness: eval set, accuracy, Studio Level exports, fail matrix, docs',s:5,d:5,e:4,l:'L1',sc:['Measure the 90% — don\'t assert it','Studio Level exports: per-studio audit report PDF/JSON','IKS dry-run before Jul 23'],dated:'IKS Jul 23',st:'overdue'},
+ {p:'Jatin',ws:'WS-17',t:'Versioning & rollback build (shifted wk2–3; backlog candidate per sizing)',s:10,d:10,e:4,l:'P1',sc:['Rollback = new version; history immutable','Staging test incl. concurrent edits','SOC 2 front-load pushed this right']},
+ {p:'Jatin',ws:'WS-30',t:'Active monitoring system (Sentry-style) — NEW',s:12,d:8,e:2,l:'P1',sc:['Replaces manual robustness evals + ECS re-benchmarks','Alerts: latency, span degradation, deploy tests']},
+ {p:'Jatin',ws:'WS-27',t:'SOC 2 gap assessment — in progress, completion at Mon go/no-go',s:1,d:9,e:3,l:'P1',st:'prog',sc:['Reframed Jul 24 (was due Jul 18)','Aditya Saini drives background evidence']},
+ {p:'Jatin',ws:'WS-27',t:'SOC 2: evidence automation + policies pack + Type 2 window',s:10,d:8,e:1.5,l:'P1',sc:['Control sign-off stays with Jatin']},
+ {p:'Jatin',ws:'WS-18',t:'Falkovia model-comparison narrative',s:10,d:2,e:0.5,l:'P1',sc:['Vaibhav runs tests; Jatin frames story']},
+ {p:'Jatin',ws:'WS-21',t:'AP3 phase 1: APIs, badge, verify+display',s:15,d:5,e:2,l:'P1',sc:['Wk3 slot; Lockheed decision point'],},
+ // Prince
+ {p:'Prince',ws:'WS-23',t:'Team OS: brew install + icon + FRIDAY team handoff',s:0,d:5,e:1.5,l:'P1',sc:['Ship now, refine later (Jatin/Gunjan agreed)'],dated:'Fri Jul 17',st:'done'},
+ {p:'Prince',ws:'WS-12',t:'Govern UI v1 UX audit — DONE (#489)',s:2,d:2,e:2,l:'P1',sc:['Audit ticket closed; understanding-gap clarity plan continues alongside'],st:'done'},
+ {p:'Prince',ws:'WS-24',t:'MetricStream UI day',s:6,d:1,e:1,l:'CUST',sc:['Budgeted 1 day; second cut if slipping']},
+ {p:'Prince',ws:'WS-15',t:'Design system foundation — STARTS NEXT WEEK Jul 27 (then ONGOING lane)',s:10,d:5,e:2,l:'P1',sc:['Foundation: tokens, typography, spacing, colors, icons, usage guideline (1–2d)','Akshit\'s component implementation follows his start','Living workstream, not a closeable ticket']},
+ {p:'Prince',ws:'WS-12',t:'Govern UI v2 flows/design — IMPLEMENTATION IN PROGRESS, continues (est 5d)',s:8,d:9,e:5,l:'P1',st:'prog',sc:['Audit done; design implementation running w/ clarity plan (Akshit + Arbind pairing, recurring calls)','Feeds Akshit\'s final-week build'],dated:'freeze at risk'},
+ {p:'Prince',ws:'WS-23',t:'Team OS PRD close w/ Gunjan + board v0 + graphify integration start',s:10,d:4,e:2,l:'P1',sc:['TeamSquare naming + architecture decision','Graphify per Jatin\'s answers'],st:'done'},
+ {p:'Prince',ws:'WS-15',t:'GTM asset Figma templates + deck Keynote→Figma (GATED on content)',s:10,d:5,e:4.5,l:'P1',sc:['Prince est accepted: 4–5d ONCE content/requirements exist — content is the gate','Cut before the website slice per updated cut order']},
+ {p:'Prince',ws:'WS-16',t:'Homepage P0 SLICE: design + build (full site → WS-16b August)',s:15,d:5,e:5,l:'P1',sc:['Ruling Jul 24: slice ships by Aug 7; sitemap/content fixes move to August','No longer first-cut: GTM templates + MetricStream day cut before this']},
+ // Rabia
+ {p:'Rabia',ws:'WS-26',t:'Auto-QA on every PR + CI gates (w/ Aditya)',s:0,d:4,e:3,l:'PROC',sc:['Per-PR QA checks, not nightly; branch protection']},
+ {p:'Rabia',ws:'WS-20',t:'Eval architecture handoff md (OVERDUE)',s:0,d:2,e:1,l:'P1',sc:['Jatin asked Jul 9 arch call'],dated:'overdue'},
+ {p:'Rabia',ws:'WS-23',t:'Team OS co-owner: install QA + morning-triage testing',s:2,d:3,e:1,l:'P1',sc:['Validate installable before Friday handoff','Test gather/triage flows as first real user'],st:'done'},
+ {p:'Rabia',ws:'WS-20',t:'Evals roadmap + failure-case corpus pipeline',s:5,d:4,e:2.5,l:'P1',sc:['QA finds + prod traces → eval sets'],st:'overdue'},
+ {p:'Rabia',ws:'WS-20',t:'Weekly regression cadence + quality trend',s:10,d:3,e:1.5,l:'P1',sc:['Manual trigger on prompt changes ($12/600)']},
+ {p:'Rabia',ws:'WS-26',t:'QA gates: WS-10/11/13 + operate 2pm line',s:5,d:15,e:3,l:'PROC',sc:['Click-throughs, placeholder sweep, connector smoke','Devs self-test + Prince assist in tickets']},
+ // Surjoyday
+ {p:'Surjoyday',ws:'WS-13',t:'GitHub connector: land PRs, smoke, doc',s:0,d:3,e:2,l:'P1',sc:['In review since June — finish first']},
+ {p:'Surjoyday',ws:'WS-14',t:'Pricing decisions (superseded by credits-unification #2921)',s:3,d:2,e:0.5,l:'P1',sc:[],st:'done'},
+ {p:'Surjoyday',ws:'WS-10',t:'Studio unification: integrate, sessions, prod route, kill redirects',s:5,d:8,e:6,l:'P1',sc:['Creator Studio decision IN WRITING','Rabia QA sign-off; delete redirect code'],st:'prog'},
+ {p:'Surjoyday',ws:'WS-14',t:'Gateway integration + metering + ledger + 1 tier in sandbox',s:10,d:8,e:5,l:'P1',sc:['Purchase → credits decrement on real usage']},
+ {p:'Surjoyday',ws:'WS-22',t:'/developers page (STRETCH)',s:17,d:3,e:1.5,l:'STR',sc:['SSR, demo, 3-line install — drops first']},
+ // Vaibhav
+ {p:'Vaibhav',ws:'WS-02',t:'Google ADK v1: adapter, e2e, quickstart, dry-run',s:0,d:4,e:3,l:'L1',sc:['Python-only scope note; v1→GA gap list'],dated:'Verizon Jul 14',st:'review'},
+ {p:'Vaibhav',ws:'WS-01',t:'ECS tests support (w/ Anmol)',s:2,d:2,e:1,l:'L1',sc:[],st:'overdue'},
+ {p:'Vaibhav',ws:'WS-19',t:'Judge experiment design + competitor rubric',s:4,d:1,e:1,l:'P1',sc:['RML-in-judge + semantic closeness design']},
+ {p:'Vaibhav',ws:'WS-06',t:'Policy extraction: HITL UI + eval/testing (basic already deployed)',s:5,d:7,e:3,l:'L1',sc:['Confirm feature flag','Descope to 10 prompts if needed'],st:'prog'},
+ {p:'Vaibhav',ws:'WS-18',t:'Model-comparison test runs (Falkovia)',s:5,d:3,e:1.5,l:'P1',sc:['Jatin frames the narrative'],st:'blocked'},
+ {p:'Vaibhav',ws:'WS-25',t:'Galileo + Trustwise demos (w/ Aditya)',s:6,d:5,e:1,l:'P1',sc:['Voice latency 200–300ms bar; pricing quotes'],st:'review'},
+ {p:'Rabia',ws:'WS-19',t:'Judge agreement measurement + GATE decision (Vaibhav guides)',s:10,d:4,e:1.5,l:'P1',sc:['Reassigned Jul 24 — was unassigned on board (#39)','Rides TL-119 large-n rerun; Vaibhav guides method','Below threshold end wk3 → cheap-judge claim OUT of pitches'],dated:'gate wk3'},
+ {p:'Vaibhav',ws:'WS-12',t:'Govern UI v2 validation (w/ Arbind)',s:10,d:2,e:0.5,l:'P1',sc:[]},
+ {p:'Vaibhav',ws:'WS-08',t:'Persistent memory substrate — drives (swap per Jul 13)',s:10,d:10,e:5,l:'L2',sc:['Versioning, namespacing, retrieval API, auto-retrieve, ACL, migration','Memory panel + used-memory indicator w/ Akshit','Constant loop w/ Arbind (graph)']},
+ {p:'Vaibhav',ws:'WS-04',t:'Latency: execution, validation + testing',s:8,d:4,e:1.5,l:'L1',sc:['Validates Arbind\'s cut-path on ECS']},
+ {p:'Vaibhav',ws:'WS-07',t:'CI phase-1 scope spike (participant)',s:2,d:3,e:1,l:'L2',sc:[],st:'done'}
+];
+
+const CAP={ 'Aditya Jaiswal':{buf:.4,label:'40% GTM buffer'},'Aditya Saini':{buf:0,label:'no buffer'},'Akshit':{buf:0,label:'no buffer'},'Anmol':{buf:0,label:'no buffer'},'Arbind':{buf:.3,label:'30% GTM buffer'},'Jatin':{buf:.3,label:'30% GTM buffer'},'Prince':{buf:0,label:'no buffer'},'Rabia':{buf:0,label:'no buffer'},'Surjoyday':{buf:0,label:'no buffer'},'Vaibhav':{buf:.2,label:'20% GTM buffer'} };
+/* capacity split: planning week = 5d, execution = 15d, each reduced by the person's GTM buffer */
+function caps(p){const b=CAP[p].buf;return {pc:+(5*(1-b)).toFixed(1), xc:+(15*(1-b)).toFixed(1)}}
+/* prorate an assignment's estimate across planning (days 0–4) vs execution (days 5–19) by overlap */
+function splitEst(a){const pd=Math.max(0,Math.min(a.s+a.d,5)-Math.min(a.s,5));const f=pd/a.d;return [a.e*f, a.e*(1-f)]}
+function loads(rows){let p=0,x=0;for(const a of rows){const [pe,xe]=splitEst(a);p+=pe;x+=xe}return [p,x]}
+const VERDICT={
+ 'Aditya Jaiswal':'REMAINING ~13.5d vs ~6d left (40% buffer). Overdue: unified pricing contract doc (blocks Surjoy+Akshit), AlphaStreet criteria, go/no-go ritual. Website copy + Verizon Jul 28 next week. Delegate or drop — this is the coordination-tax week.',
+ 'Aditya Saini':'REMAINING ~13d vs ~10d. MetricStream credit pricing to Sat, then contract repo + SOC 2 evidence + Nasiko scope lock (moved to him, overdue on board dates). Scoping doc BLOCKED — unblock or hand to Aditya J.',
+ 'Akshit':'WK-1 ACTUALS: govern v1 audit (w/ Prince), onboarding flow improvements, PQA tickets. REMAINING ~14d vs ~10d, resequenced per Jatin: pricing UI w/ Surjoy (Jul 27–31), components implementation ongoing after Prince starts DS, FINAL WEEK triple-booked (govern build + memory panel + Agent Fleet) — one of the three moves Monday.',
+ 'Anmol':'REMAINING ~20.3d vs ~10d — now owns Nasiko integration too (S71 umbrella, 5d). Composio egress batch (P0) first; fusion research + OSS SDK are his cuts if Nasiko holds.',
+ 'Arbind':'REMAINING ~30.3d vs ~7d — WORST, and two board estimates look inflated: E1/E2/E4 wave (15d shared) + CI spike follow-up (5d, looks auto-created). VERIFY both at Monday go/no-go before panicking; even halved he needs cuts.',
+ 'Jatin':'REMAINING ~20.4d vs ~7d, WITH LEAVE COMING. SOC 2 in progress, monitoring + rollback phase 2 + fleet + WS-03 all queued. Rollback phase 2 is the flagged backlog candidate — Monday is the moment to actually cut it.',
+ 'Prince':'REMAINING ~16d vs ~10d. Audit done; govern flows/design in progress and continues (freeze at risk). DS foundation starts Jul 27, then ongoing. Homepage slice final week. GTM templates gated on content — first cut.',
+ 'Rabia':'REMAINING ~22d vs ~10d. E-wave + policy-generation PROD QA (#172) + judge gate + evals roadmap (overdue) + QA gates. Verify shared-QA estimates Monday; devs self-QA discipline is what saves this.',
+ 'Surjoyday':'REMAINING ~19.3d vs ~10d. Credits-unification service (overdue) + gateway build (S71) + stabilization + AIKO cluster + fleet. /developers page drops; AIKO polish is the next cut.',
+ 'Vaibhav':'REMAINING ~12d vs ~8d — most improved (ADK + demos in review, judge gate → Rabia). Memory substrate (S71) is the big rock; latency validation + loadbench cluster + #172 QA share around it.'
+};
+const PEOPLE=Object.keys(CAP);
+const PRI={L1:0,L2:1,P1:2,CUST:3,PROC:4,STR:5};
+
+/* ================= RENDER ================= */
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function wkOf(s,d){const w1=Math.floor(s/5),w2=Math.floor((s+d-1)/5);const nm=['P','W1','W2','W3','QA'];return w1===w2?nm[w1]:nm[w1]+'–'+nm[w2]}
+
+/* Tab 1 */
+(function(){
+ const groups=[['L1','Lead Lane 1 — Explainability chain','Gates all forward deployment: Verizon, WF, IKS, Nasiko, Skit, AlphaStreet, Lockheed.'],
+   ['L2','Lead Lane 2 — Collective Intelligence phase 1','The strategic bet. Spike closes in planning week; build follows.'],
+   ['P1','P1 — Must land this month','Staffed after the lead lanes; cuts come from the bottom of this list, never from the lanes.'],
+   ['CUST','Customer-dated','Owned per team-loops; dates re-negotiated consciously or met.'],
+   ['PROC','Process — non-descopable','The tracking loop that makes every DoD above enforceable.']];
+ let h='';
+ for(const [lane,title,desc] of groups){
+   const items=WS.filter(w=>w.lane===lane);
+   if(!items.length)continue;
+   h+=`<div class="lanehead ${lane.toLowerCase()}">${title}</div><div class="lanedesc">${desc}</div><div class="wsgrid">`;
+   for(const w of items){
+     h+=`<div class="ws" id="card-${w.id}"><div class="ws-h" onclick="this.parentNode.classList.toggle('open')">
+       <span class="ws-arrow">▶</span><span class="wsid" style="background:${LANES[w.lane][0]}">${w.id}</span><span class="ws-t">${esc(w.t)}</span>${stChip(w.st)}<span class="ws-own">${esc(w.own)}</span></div>
+       <div class="ws-b">
+        <div class="ws-sec"><div class="ws-lb">End goal — why this exists</div><p class="goalp">${esc(w.goal||'')}</p></div>
+        <div class="ws-sec"><div class="ws-lb">Definition of done</div><p>${esc(w.dod)}</p></div>
+        <div class="ws-sec"><div class="ws-lb">Subtasks</div><ul>${w.sub.map(s=>`<li>${esc(s)}</li>`).join('')}</ul></div>
+        ${w.dep?`<div class="ws-sec"><div class="ws-lb">Depends on</div><p>${esc(w.dep)}</p></div>`:''}
+        ${w.risk?`<div class="risk"><b>Risk:</b> ${esc(w.risk)}</div>`:''}
+       </div></div>`;
+   }
+   h+='</div>';
+ }
+ document.getElementById('wsroot').innerHTML=h;
+})();
+function toggleAll(){const cards=[...document.querySelectorAll('.ws')];const anyClosed=cards.some(c=>!c.classList.contains('open'));cards.forEach(c=>c.classList.toggle('open',anyClosed));}
+
+/* Tab 2 */
+(function(){
+ let h='';
+ for(const p of PEOPLE){
+   const rows=A.filter(a=>a.p===p).sort((x,y)=>PRI[x.l]-PRI[y.l]||x.s-y.s);
+   const [pTot,xTot]=loads(rows), {pc,xc}=caps(p), tot=pTot+xTot, tcap=pc+xc;
+   const clsOf=(v,c)=>v>c+0.5?'over':(v>c-1?'warn':'ok');
+   const worst=(a,b)=>['over','warn','ok'].find(k=>a===k||b===k);
+   const pCls=clsOf(pTot,pc), xCls=clsOf(xTot,xc), cls=worst(pCls,xCls);
+   const bar=(v,c,k)=>`<div class="capline ${k}"><span class="caplab">${k==='pln'?'Planning (Jul 13–17)':'Execution (Jul 20–Aug 7)'}</span><span class="capnum ${clsOf(v,c)}n">${v.toFixed(1)}d / ${c}d</span><div class="capbar"><div class="capfill ${clsOf(v,c)}f" style="width:${Math.min(100,Math.round(v/c*100))}%"></div></div></div>`;
+   h+=`<div class="person ${cls}"><div class="p-h"><div><div class="p-name">${p}</div><div class="p-role">${CAP[p].label} · planning cap ${pc}d of 5 · execution cap ${xc}d of 15 · total ${tot.toFixed(1)}d / ${tcap}d</div></div>
+     <div class="p-cap">${bar(pTot,pc,'pln')}${bar(xTot,xc,'exe')}</div></div>
+     <div class="p-verdict ${cls}">${esc(VERDICT[p])}</div>
+     <table class="tasktbl"><tr><th style="width:44%">Task &amp; scope</th><th>Definition of done (workstream)</th><th style="width:70px">Weeks</th><th style="width:88px">Est (draft)</th></tr>`;
+   for(const a of rows){
+     const w=WS.find(x=>x.id===a.ws)||{dod:''};
+     h+=`<tr><td><div class="t-title"><span class="t-ws" style="background:${LANES[a.l][0]}">${a.ws}</span>${esc(a.t)} ${stChip(a.st)}${a.dated?` <span class="mono" style="color:var(--red);font-size:10.5px;font-weight:600">▼ ${esc(a.dated)}</span>`:''}</div>
+       ${w.goal?`<div class="t-goal">◎ End goal: ${esc(w.goal)}</div>`:''}
+       ${a.sc.length?`<ul class="t-scope">${a.sc.map(s=>`<li>${esc(s)}</li>`).join('')}</ul>`:''}</td>
+       <td class="t-dod">${esc(w.dod)}</td>
+       <td><span class="wk-chip">${wkOf(a.s,a.d)}</span></td>
+       <td class="estcell">${a.e}d<small>committed</small></td></tr>`;
+   }
+   h+='</table></div>';
+ }
+ document.getElementById('peopleroot').innerHTML=h;
+})();
+
+/* Timelines */
+function renderTimeline(el,rowsKey){
+ const container=document.getElementById(el);
+ let h=`<div class="tl-weeks"><div style="border-right:2px solid rgba(255,255,255,.35)">&nbsp;</div>${WEEKS.map(w=>`<div>${w}</div>`).join('')}</div>`;
+ h+=`<div style="position:relative;height:0"><span class="todaylab" style="left:calc(210px + (100% - 210px)*0.4)">TODAY Jul 24</span></div>`;
+ h+=`<div class="tl-head"><div class="tl-corner">${rowsKey==='p'?'Person':'Workstream'}</div>${DAYS.map((d,i)=>`<div class="tl-day ${i%5===4?'wkend':''}">${d}</div>`).join('')}</div>`;
+ const groups = rowsKey==='p' ? PEOPLE.map(p=>({label:p,sub:CAP[p].label,items:A.filter(a=>a.p===p)}))
+   : WS.map(w=>({label:w.id+' · '+w.t,sub:w.own,items:A.filter(a=>a.ws===w.id).map(a=>({...a,t:a.p+': '+a.t}))})).filter(g=>g.items.length);
+ for(const g of groups){
+   const items=[...g.items].sort((x,y)=>x.s-y.s||PRI[x.l]-PRI[y.l]);
+   // lane packing
+   const laneEnds=[];
+   for(const it of items){let li=laneEnds.findIndex(e=>e<=it.s);if(li<0){li=laneEnds.length;laneEnds.push(0)}laneEnds[li]=it.s+it.d;it.lane=li;}
+   const height=laneEnds.length*27+10;
+   let cap='';
+   if(rowsKey==='p'){const [pT,xT]=loads(g.items),{pc,xc}=caps(g.label);
+     const col=(v,c)=>v>c+0.5?'var(--red)':(v>c-1?'var(--amber)':'var(--green)');
+     cap=`<div class="cp">Pln <span style="color:${col(pT,pc)}">${pT.toFixed(1)}/${pc}</span> · Exe <span style="color:${col(xT,xc)}">${xT.toFixed(1)}/${xc}</span></div>`;}
+   h+=`<div class="tl-row"><div class="tl-who"><div class="nm">${esc(g.label)}</div><div style="font-size:11px;color:var(--ink3)">${esc(g.sub||'')}</div>${cap}</div>
+     <div class="tl-canvas" style="height:${height}px">`;
+   for(let wk=1;wk<5;wk++)h+=`<div class="wksep" style="left:${wk*20}%"></div>`;
+   h+=`<div class="todayline" style="left:40%"></div>`;
+   for(const it of items){
+     const left=it.s/25*100, width=it.d/25*100;
+     const stretch=it.l==='STR';
+     h+=`<div class="bar ${stretch?'stretch':''} ${it.st?'st-'+it.st:''}" style="left:${left}%;width:${width}%;top:${5+it.lane*27}px;background:${stretch?'var(--strbg)':LANES[it.l][0]}" title="${esc(it.ws+' · '+it.t+' — '+it.e+'d'+(it.st?' — '+STL[it.st]:''))}">${it.st==='done'?'✓ ':''}${it.ws} · ${esc(it.t)}${it.e?`<span class="est">${it.e}d</span>`:''}</div>`;
+     if(it.dated)h+=`<div class="dated" style="left:${left}%">▼ ${esc(it.dated)}</div>`;
+   }
+   h+='</div></div>';
+ }
+ container.innerHTML=h;
+}
+renderTimeline('tl-people','p');
+renderTimeline('tl-ws','ws');
+
+/* Tabs */
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+ document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+ document.querySelectorAll('.pane').forEach(x=>x.classList.remove('on'));
+ t.classList.add('on');document.getElementById(t.dataset.pane).classList.add('on');
+}));
+</script>
+</body>
+</html>
